@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{71C9DE2D-29C7-4EC8-B61C-4FD558DAC91B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServer", "src\WebSocketServer\WebSocketServer.csproj", "{24E54BEB-F3FF-493F-89C0-A7F074810BEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24E54BEB-F3FF-493F-89C0-A7F074810BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E54BEB-F3FF-493F-89C0-A7F074810BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E54BEB-F3FF-493F-89C0-A7F074810BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E54BEB-F3FF-493F-89C0-A7F074810BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{24E54BEB-F3FF-493F-89C0-A7F074810BEC} = {71C9DE2D-29C7-4EC8-B61C-4FD558DAC91B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8737A22D-6954-40F4-A8C8-9F93548F9EF3}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,16 @@
+@host = http://192.168.31.39:5001
+@ctsjon = Content-Type: application/json
+
+
+
+POST {{host}}/api/message/send HTTP/1.1
+{{ctsjon}}
+
+{
+    "opcode":2,
+    "uid":"1234",
+    "vcode":"123456",
+    "body":{
+        "msg":"测试数据"
+    }
+}

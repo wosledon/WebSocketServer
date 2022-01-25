@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>a8a01322-1914-4223-88fc-fb0eb6316178</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="JT808.Protocol">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\JT808.Protocol.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Channel">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.Channel.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Command">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.Command.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Primitives">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.ProtoBase">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.ProtoBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Server">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SessionContainer">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.SessionContainer.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Udp">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.Udp.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.WebSocket">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.WebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.WebSocket.Server">
+      <HintPath>..\..\..\PMPlatform\01Code\0101NET\PMPlatform\src\PMPlatform.DLLs\SuperSocket.WebSocket.Server.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\images\" />
+    <Folder Include="wwwroot\uploads\xlsx\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Test.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

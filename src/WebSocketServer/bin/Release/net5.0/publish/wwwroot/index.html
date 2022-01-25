@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<style>
+    textarea,
+    label {
+        display: block;
+    }
+
+    h4 input {
+        margin-left: 20px;
+        width: 200px;
+    }
+</style>
+
+<body>
+    <!--<form method="post" action="/api/UploadFiles" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" />
+        <input type="submit" value="上传" />
+    </form>-->
+    <h4>
+        websocket服务器地址
+        <input type="text" value="ws://localhost:40100" id="wsurl" />
+    </h4>
+    <textarea name="" id="msgBox" cols="100" rows="10"></textarea>
+    <h4>数据</h4>
+    <textarea type="text" id="sendMsg" cols="100" rows="10"></textarea>
+    <button onclick="sendMsg()">发送数据</button>
+    <label>登录数据样例:</label>
+    <label>{"opcode":1,"uid":"123","vcode":"123456","body":null}</label>
+    <label>心跳数据样例:</label>
+    <label>{"opcode":0,"uid":"123","vcode":"123456","body":null}</label>
+    <label>群发数据样例:</label>
+    <label id="bc"></label>
+    <label>单发数据样例:</label>
+    <label id="single"></label>
+    <label>确认数据样例:(MessageId是必须的)</label>
+    <label>{"opcode":5,"uid":"123","vcode":"123456","MessageId":"680a7bd8-fe05-4dcf-89f4-186ee8a2fcf9","body":null}</label>
+    <h4>Logs:</h4>
+    <textarea name="" id="logs" cols="100" rows="15"></textarea>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    var wsurl = document.getElementById("wsurl");
+    var msgBox = document.getElementById("msgBox");
+    var sMsg = document.getElementById("sendMsg");
+
+    var single = document.getElementById("single");
+    var bc = document.getElementById("bc");
+
+    var logBox = document.getElementById("logs");
+
+    var line = 0;
+
+    var timer = null;
+
+    var date = new Date();
+
+    function GetDate() {
+        return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    }
+
+    function Log(log) {
+        logBox.value += (++line) + ".\t" + GetDate() + log + "\n";
+        logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    Log("[INFO] url加载成功: " + wsurl.value);
+
+    var data = {
+        opcode: 1,
+        uid: "server",
+        vcode: "123456",
+        body: null,
+    };
+
+    var msg = JSON.stringify(data);
+
+    var heartbeat = {
+        opcode: 0,
+        uid: "server",
+        vcode: "123456",
+        body: null,
+    };
+
+    var hbmsg = JSON.stringify(heartbeat);
+
+    var websocket = null;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket(wsurl.value);
+        Log("[INFO] WebSocket创建成功")
+    }
+    else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+    websocket.onerror = function () {
+        Log("[ERROR] WebSocket连接发生错误");
+    };
+
+    websocket.onopen = function () {
+        Log("[INFO] WebSocket连接成功");
+        websocket.send(msg)
+
+        timer = setInterval(() => {
+            websocket.send(hbmsg)
+            Log("[INFO] 发送心跳");
+        }, 30000);
+    }
+
+    websocket.onmessage = function (event) {
+        console.log(event.data)
+        if (event.data.OpCode != 0) {
+            msgBox.value += event.data + "\n";
+        } else {
+            Log("[INFO] 心跳保活");
+        }
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        Log("[INFO] WebSocket连接关闭");
+        clearInterval(timer);
+    }
+
+    function Send(message) {
+        websocket.send(message);
+        Log("[INFO] 发送数据成功", message)
+    }
+
+    function sendMsg() {
+        Send(sMsg.value);
+    }
+
+    function sendBCMsg() {
+        Send(sMsg.value);
+    }
+
+    var singleMsg = {
+        opcode: 4,
+        uid: "123",
+        vcode: "123456",
+        body: "单发数据",
+    };
+
+    var bcMsg = {
+        opcode: 3,
+        uid: "server",
+        vcode: "123456",
+        body: "群发数据",
+    };
+
+    single.textContent = JSON.stringify(singleMsg);
+    bc.textContent = JSON.stringify(bcMsg);
+</script>
